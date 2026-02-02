@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishita's Birthday Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #fff5f8;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; font-family: 'Poppins', sans-serif;
+            overflow-x: hidden; text-align: center;
+        }
+
+        /* --- Page 1: Entry --- */
+        #page-1 { z-index: 10; padding: 20px; }
+        .welcome-card {
+            background: white; padding: 40px; border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 77, 148, 0.2); border: 4px solid #ff4d94;
+        }
+        .magic-btn {
+            background: linear-gradient(45deg, #ff4d94, #ff1a75);
+            color: white; border: none; padding: 15px 40px;
+            border-radius: 50px; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; margin-top: 20px; box-shadow: 0 8px 20px rgba(255, 77, 148, 0.3);
+        }
+
+        /* --- Page 2: Surprise Message --- */
+        #page-2 { display: none; width: 100%; max-width: 500px; padding: 20px; animation: fadeIn 0.8s; }
+        .main-card { background: white; padding: 30px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #ffdae9; }
+        
+        /* Stand Cake Layout */
+        .cake-area { position: relative; height: 260px; margin: 20px 0; cursor: pointer; transition: 0.3s; }
+        .stand { width: 120px; height: 10px; background: #ddd; margin: 0 auto; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
+        .cake-body { width: 150px; height: 90px; background: #f06292; position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); border-radius: 8px 8px 0 0; }
+        .cake-top { width: 110px; height: 50px; background: #f48fb1; position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%); border-radius: 8px; }
+        .name-tag { position: absolute; top: 10px; width: 100%; color: white; font-family: 'Dancing Script'; font-size: 1.3rem; }
+        .candle { width: 8px; height: 30px; background: #fff176; position: absolute; bottom: 180px; left: 50%; transform: translateX(-50%); }
+        .flame { width: 12px; height: 18px; background: orange; position: absolute; bottom: 210px; left: 50%; transform: translateX(-50%); border-radius: 50%; box-shadow: 0 0 10px orange; animation: flicker 0.4s infinite alternate; }
+
+        /* --- Page 3: Cake Cut Page --- */
+        #page-3 { display: none; text-align: center; animation: zoomIn 0.5s; }
+        .cut-cake-img { width: 250px; margin-bottom: 20px; animation: pulse 2s infinite; }
+        .final-msg { font-family: 'Dancing Script'; font-size: 2.5rem; color: #ff4d94; margin-top: 10px; }
+
+        /* --- Animations --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes flicker { from { transform: translateX(-50%) scale(1); } to { transform: translateX(-50%) scale(1.2); } }
+        .magic-item { position: absolute; pointer-events: none; z-index: 100; }
+        @keyframes rain { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body onload="launchInitialPoppers()">
+
+    <div id="page-1">
+        <div class="welcome-card">
+            <h1 style="font-family: 'Dancing Script'; font-size: 3rem; color: #ff4d94;">Ishita! ✨</h1>
+            <p>Bhaiya ki taraf se ek pyaara sa surprise...</p>
+            <button class="magic-btn" onclick="goToPage2()">Open Surprise 🎁</button>
+        </div>
+    </div>
+
+    <div id="page-2">
+        <div class="main-card">
+            <h2 style="font-family: 'Dancing Script'; color: #ff4d94; font-size: 2.2rem;">Happy Birthday, Ishita! 🎂</h2>
+            <p style="font-size: 0.9rem; color: #555; margin: 15px 0; line-height: 1.6;">
+                "Tu meri sabse pyaari aur ek lauti behen hai. ❤️ Bhale hum door hain, par mera aashirwad hamesha tere saath hai. Hamesha aise hi muskurati rehna! ✨"
+                <br><b>— Kunal Bhaiya</b>
+            </p>
+
+            <div class="cake-area" onclick="goToPage3()">
+                <div class="flame"></div>
+                <div class="candle"></div>
+                <div class="cake-top"><div class="name-tag">Ishita</div></div>
+                <div class="cake-body"></div>
+                <div class="stand"></div>
+            </div>
+            <p style="color: #ff4d94; font-weight: bold;">(Cake par click karke cut karo! 🍰)</p>
+        </div>
+    </div>
+
+    <div id="page-3">
+        <h1 class="final-msg">YAYYY! Cake Cut Ho Gaya! 🥳</h1>
+        <div style="font-size: 100px; margin: 20px;">🍰🍰</div>
+        <p style="font-size: 1.2rem; color: #444;">"Ab jaldi se party karo aur maze karo!<br>Love you Behena! ❤️"</p>
+        <button class="magic-btn" onclick="location.reload()">Wapas Dekho 🔄</button>
+    </div>
+
+<script>
+    const items = ['🌸', '🌺', '🌹', '🌷', '✨', '💖', '🎊', '🎈', '⭐'];
+
+    function launchInitialPoppers() {
+        for (let i = 0; i < 50; i++) {
+            createMagic('0vw', '100vh');
+            createMagic('100vw', '100vh');
+        }
+    }
+
+    function createMagic(x, y) {
+        const p = document.createElement('div');
+        p.className = 'magic-item';
+        p.innerHTML = items[Math.floor(Math.random() * items.length)];
+        p.style.left = x; p.style.top = y;
+        p.style.fontSize = '20px';
+        p.style.transition = '2s';
+        document.body.appendChild(p);
+        setTimeout(() => {
+            p.style.transform = `translate(${(Math.random()*100-50)}vw, -${Math.random()*100}vh) rotate(360deg)`;
+            p.style.opacity = '0';
+        }, 100);
+        setTimeout(() => p.remove(), 3000);
+    }
+
+    function goToPage2() {
+        document.getElementById('page-1').style.display = 'none';
+        document.getElementById('page-2').style.display = 'block';
+    }
+
+    function goToPage3() {
+        document.getElementById('page-2').style.display = 'none';
+        document.getElementById('page-3').style.display = 'block';
+        
+        // Massive Flower Rain on Page 3
+        for (let i = 0; i < 200; i++) {
+            setTimeout(() => {
+                const f = document.createElement('div');
+                f.className = 'magic-item';
+                f.innerHTML = items[Math.floor(Math.random() * items.length)];
+                f.style.left = Math.random() * 100 + 'vw';
+                f.style.top = '-50px';
+                f.style.fontSize = '25px';
+                f.style.animation = `rain ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 5000);
+            }, i * 10);
+        }
+    }
+</script>
+
+</body>
+</html>
